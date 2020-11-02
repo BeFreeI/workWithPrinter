@@ -16,7 +16,7 @@ body{
   display: flex;
   justify-content: space-between;
   flex-direction: column-reverse;
-  width: 80vw;
+  width: 100vw;
   margin-left: 50px;
 }
 
@@ -71,12 +71,26 @@ option{
   background-color:black;
 }
 
-.choose{
+.chose{
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.chose>*{
+  width:100%;
+}
+
+.chose>*:first-child{
+  margin-bottom: 10px;
+}
+
+.btns-container{
   margin-bottom: 20px;
   width: 50vw;
-  justify-content: space-around;
+  justify-content: space-between;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .alert{
