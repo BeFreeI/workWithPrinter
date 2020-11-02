@@ -15,6 +15,7 @@ body{
   padding-top: 40px;
   display: flex;
   justify-content: space-between;
+  flex-direction: column-reverse;
   width: 80vw;
   margin-left: 50px;
 }
@@ -66,12 +67,22 @@ select, option, button{
   padding: 5px;
 }
 
-option:{
+option{
   color:black;
 }
 
 .choose{
-  width: 20vw;
+  margin-bottom: 20px;
+  width: 50vw;
+  justify-content: space-around;
   display: flex;
   align-items: flex-start;
+}
+
+.alert{
+  width: 100%;
+  padding: 30px;
+  font-size: 20px;
+  color: white;
+  background-color: rgba(124, 69, 69, .5)
 }
