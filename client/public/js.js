@@ -1,4 +1,5 @@
-const chosePrinter = document.querySelector('select');
+const chosePrinter = document.querySelector('#printers');
+const choseShablon = document.querySelector('#shablons');
 const printBtn = document.querySelector('button')
 const inputArea = document.querySelector('.input-area')
 
@@ -9,7 +10,17 @@ let json = [
     {a: "b"},
 ]
 
+let shablonStings = ["s1", "s2", "s3"]
 
+let printerStrings = ["p1", "p2", "p3"]
+
+const addInfoIntoSelect = (select, strings) => {
+    strings.forEach(str => {
+        const option = document.createElement('option')
+        option.textContent = str;
+        select.append(option);
+    })
+}
 
 const renderAlert = (text) => {
     const alert = document.createElement('div');
@@ -66,6 +77,10 @@ const renderInputs = (inputArea, inputs) => {
         inputs.forEach(inp => inputArea.append(inp))
 
 }
+
+
+addInfoIntoSelect(choseShablon, shablonStings)
+addInfoIntoSelect(chosePrinter, printerStrings)
 
 renderInputs(inputArea, createInputs(json))
 

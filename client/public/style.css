@@ -68,7 +68,7 @@ select, option, button{
 }
 
 option{
-  color:black;
+  background-color:black;
 }
 
 .choose{
