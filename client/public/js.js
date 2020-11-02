@@ -48,7 +48,14 @@ const createInputs = (json) => {
     })
 }
 
-const getInfoInInputs = (inputArea) => {
+const getInfo = (inputArea, choseShablon, chosePrinter) => {
+    const getSelectedOption = (select) => {
+        const option = Array.from(select.childNodes).find(option => {
+            return option.selected;
+        })
+        return option.textContent;
+    }
+
     const inputs = Array.from(inputArea.childNodes)
     const rez = inputs[0].classList.contains('alert') ? [] :
         inputs.map(container => {
@@ -58,6 +65,12 @@ const getInfoInInputs = (inputArea) => {
                 name: description,
             }
         })
+    rez.push({
+        "sample": `${getSelectedOption(choseShablon)}`
+    })
+    rez.push({
+        "printer": `${getSelectedOption(chosePrinter)}`
+    })
 //==============//
     console.log(rez) //нужно будет его достать
 //==============//
@@ -85,5 +98,5 @@ addInfoIntoSelect(chosePrinter, printerStrings)
 renderInputs(inputArea, createInputs(json))
 
 printBtn.addEventListener('click', (inputs) => {
-    getInfoInInputs(inputArea)
+    getInfo(inputArea, choseShablon, chosePrinter)
 })
