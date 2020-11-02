@@ -16,18 +16,35 @@ body{
   display: flex;
   justify-content: space-between;
   width: 80vw;
-  margin: auto;
   margin-left: 50px;
 }
-textarea{
+
+.input-area{
   width: 70%;
-  height: 30vh;
+}
+input{
+  width: 100%;
+  margin-bottom: 10px;
   background-color: rgba(0, 0, 0, .5);
   border: 1px solid rgba(0, 0, 0, .5);
   color: #fff;
   padding: 10px;
 
+
   border-radius: 8px;
+}
+
+.inp-container{
+  display: flex;
+  flex-direction: column;
+}
+
+span{
+  color: #fff;
+}
+
+input::placeholder{
+  color: #bfbfbf;
 }
 
 button{

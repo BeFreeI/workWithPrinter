@@ -1,39 +1,39 @@
 const chosePrinter = document.querySelector('select');
-fetch('http://localhost:8000/printer')
-  .then((res) => {
-    res.json().then((printers) => {
-      for(let i = 0; i < printers.length; i++) {
-        let el = document.createElement("option");
-        el.innerHTML = printers[i];
-        chosePrinter.append(el);
-      }
-    })
-  });
+const printBtn = document.querySelector('button')
 
-document.querySelector('button').addEventListener('click', () => {
-  // console.log(document.querySelector('textarea').value);
-  fetch('http://localhost:8000/printer', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      printer: chosePrinter.value,
-      string: document.querySelector('textarea').value.trim()
-    })
-  }).then((res) => {
-    console.log(res);
-  })
-});
+const inputArea = document.querySelector('.input-area')
 
-function changeButtonState() {
-  if(chosePrinter.value !== "Выберите принтер" && document.querySelector('textarea').value !== "") {
-    document.querySelector('button').removeAttribute('disabled');
-  } else {
-    document.querySelector('button').setAttribute('disabled', 'disabled');
+let json = [
+  {name: "description1"},
+  {name: "description2"},
+  {name: "description3"},
+  {name: "description4"},
+]
+
+let inputs = json.map(obj => {
+  const inpContainer = document.createElement('div');
+  const inp = document.createElement('input');
+  inpContainer.classList.add('inp-container')
+  const name = document.createElement('span')
+  for(let val in obj){
+    inp.placeholder = obj[val];
+    name.textContent = val;
   }
+  inpContainer.append(name, inp)
+  return inpContainer;
+})
+
+
+const getAllInputs = () => {
+  const rez = inputs.map(container => {
+    let name = container.firstChild.textContent
+    let description = container.lastChild.value;
+    return {
+      name: description,
+    }
+  })
+  console.log(rez)
 }
 
-chosePrinter.addEventListener('change', changeButtonState);
-
-document.querySelector('textarea').addEventListener('blur', changeButtonState);
+inputs.forEach(inp => inputArea.append(inp))
+printBtn.addEventListener('click', getAllInputs)
