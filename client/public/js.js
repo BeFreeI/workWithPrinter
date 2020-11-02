@@ -1,16 +1,13 @@
 const chosePrinter = document.querySelector('#printers');
-const choseShablon = document.querySelector('#shablons');
+const choseSample = document.querySelector('#samples');
 const printBtn = document.querySelector('button')
 const inputArea = document.querySelector('.input-area')
 
 let json = [
-    {a: "b"},
-    {name: "bdskfl"},
-    {a: "b"},
-    {a: "b"},
+
 ]
 
-let shablonStings = ["s1", "s2", "s3"]
+let sampleStrings = ["s1", "s2", "s3"]
 
 let printerStrings = ["p1", "p2", "p3"]
 
@@ -48,7 +45,8 @@ const createInputs = (json) => {
     })
 }
 
-const getInfo = (inputArea, choseShablon, chosePrinter) => {
+const getInfo = (inputArea, choseSample, chosePrinter) => {
+
     const getSelectedOption = (select) => {
         const option = Array.from(select.childNodes).find(option => {
             return option.selected;
@@ -57,16 +55,16 @@ const getInfo = (inputArea, choseShablon, chosePrinter) => {
     }
 
     const inputs = Array.from(inputArea.childNodes)
-    const rez = inputs[0].classList.contains('alert') ? [] :
+    const rez = !inputArea.hasChildNodes() ? [] :
         inputs.map(container => {
             let name = container.firstChild.textContent
             let description = container.lastChild.value;
-            return {
-                name: description,
-            }
+            let obj = {};
+            obj[name] = description
+            return obj
         })
     rez.push({
-        "sample": `${getSelectedOption(choseShablon)}`
+        "sample": `${getSelectedOption(choseSample)}`
     })
     rez.push({
         "printer": `${getSelectedOption(chosePrinter)}`
@@ -85,18 +83,16 @@ const clearInputArea = (inputArea) => {
 
 const renderInputs = (inputArea, inputs) => {
     clearInputArea(inputArea)
-    !inputs.length ?
-        inputArea.append(renderAlert('вы не выбрали шаблон')) :
-        inputs.forEach(inp => inputArea.append(inp))
+    inputs.forEach(inp => inputArea.append(inp))
 
 }
 
 
-addInfoIntoSelect(choseShablon, shablonStings)
+addInfoIntoSelect(choseSample, sampleStrings)
 addInfoIntoSelect(chosePrinter, printerStrings)
 
 renderInputs(inputArea, createInputs(json))
 
 printBtn.addEventListener('click', (inputs) => {
-    getInfo(inputArea, choseShablon, chosePrinter)
+    getInfo(inputArea, choseSample, chosePrinter)
 })
